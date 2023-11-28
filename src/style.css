@@ -1,0 +1,76 @@
+*,
+body {
+  margin: 0 auto;
+}
+body {
+  background-image: url("../public/back2.jpg");
+  background-size: cover;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+  font-weight: bold;
+}
+tr {
+  height: 50px;
+}
+tr-wrapper {
+  margin-bottom: 20px;
+}
+.td-left {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 2px solid royalblue;
+  height: 80px;
+}
+.td-right {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-right: 2px solid royalblue;
+  border-top: 2px solid royalblue;
+  border-bottom: 2px solid royalblue;
+  height: 80px;
+}
+#title {
+  margin-left: 100px;
+  color: beige;
+}
+#grid {
+  margin-left: 50px;
+  width: 200px;
+  text-align: center;
+}
+#grid tr:nth-child(odd) {
+  background-color: skyblue;
+}
+#grid tr:nth-child(even) {
+  background-color: #aed7f4;
+}
+.round {
+  border-radius: 5%;
+  text-align: center;
+  border: 3px solid #7bdfff;
+}
+.zoom {
+  transition: transform 1s;
+}
+.zoom:hover {
+  transform: scale(1.2);
+}
+.center {
+  padding: 30px;
+  width: 700px;
+}
+.td1 {
+  background-color: white;
+  border-radius: 20px;
+  border: 3px solid #7bdfff;
+  text-align: center;
+  width: 30px;
+}
+#td2 {
+  text-align: center;
+}
+.ChangeImage {
+  cursor: pointer;
+}
