@@ -2,10 +2,6 @@
 body {
   margin: 0 auto;
 }
-body {
-  background-image: url("../public/back2.jpg");
-  background-size: cover;
-}
 table {
   border-collapse: separate;
   border-spacing: 0 20px;
@@ -31,10 +27,7 @@ tr-wrapper {
   border-bottom: 2px solid royalblue;
   height: 80px;
 }
-#title {
-  margin-left: 100px;
-  color: beige;
-}
+
 #grid {
   margin-left: 50px;
   width: 200px;
