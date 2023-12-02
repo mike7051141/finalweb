@@ -2,24 +2,19 @@
 import { useState } from "react";
 import axios from "axios";
 
-const Kogpt = () => {
+const Karlo = () => {
   const [inputText, setInputText] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
-
-  const makeStroy = async () => {
+  const [imageUrl, setImageUrl] = useState("");
+  const makeImg = async () => {
     try {
       const data = JSON.stringify({
         prompt: inputText,
-        max_tokens: 512,
-        temperate: 0.8,
-        top_p: 1,
-        n: 1,
       });
 
       const config = {
         method: "post",
+        url: "/v2/inference/karlo/t2i",
         maxBodyLength: Infinity,
-        url: "/v1/inference/kogpt/generation",
         headers: {
           Authorization: "KakaoAK 4eb86019e227977251af1441c837fb0c",
           "Content-Type": "application/json",
@@ -28,7 +23,7 @@ const Kogpt = () => {
       };
 
       const response = await axios.request(config);
-      setTranslatedText(inputText + response.data.generations[0].text);
+      setImageUrl(response.data.images[0].image);
     } catch (error) {
       console.error(error);
     }
@@ -40,15 +35,20 @@ const Kogpt = () => {
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="스토리의 초기부분을 작성해주세요 :"
+          placeholder="이미지에 대한 설명을 해주세요 (영어만 가능) :"
           rows={4}
-          style={{ width: "100%" }}
+          style={{ width: "80%" }}
         />
+        <button onClick={makeImg}>이미지 제작</button>
       </div>
-      <button onClick={makeStroy}>스토리 생성</button>
-      <p style={{ color: "darkblue", fontSize: 16 }}>{translatedText}</p>
+
+      <img
+        src={imageUrl}
+        alt="Generated Image"
+        style={{ marginTop: 10, maxWidth: "100%" }}
+      />
     </div>
   );
 };
 
-export default Kogpt;
+export default Karlo;

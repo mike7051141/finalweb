@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GPT from "./pages/GPT";
 import Main from "./pages/Main";
 import Kogpt from "./pages/Kogpt";
+import Karlo from "./pages/Karlo";
 export default function App() {
   const [current, setCurrent] = useState("third");
 
@@ -27,10 +28,14 @@ export default function App() {
         <div style={{ cursor: "pointer" }} onClick={() => setCurrent("kogpt")}>
           <h3 className="item">Kogpt</h3>
         </div>
+        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("karlo")}>
+          <h3 className="item">Karlo</h3>
+        </div>
       </div>
       {current === "main" && <Main />}
       {current === "gpt" && <GPT />}
       {current === "kogpt" && <Kogpt />}
+      {current === "karlo" && <Karlo />}
     </div>
   );
 }

@@ -9,4 +9,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/v2",
+    createProxyMiddleware({
+      target: "https://api.kakaobrain.com",
+      changeOrigin: true,
+    })
+  );
 };
