@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import GPT from "./pages/GPT";
 import Main from "./pages/Main";
+import Papago from "./pages/Papago";
 import Kogpt from "./pages/Kogpt";
 import Karlo from "./pages/Karlo";
+import Book from "./pages/Book";
 export default function App() {
-  const [current, setCurrent] = useState("third");
+  const [current, setCurrent] = useState("main");
 
   return (
     <div>
@@ -31,11 +33,15 @@ export default function App() {
         <div style={{ cursor: "pointer" }} onClick={() => setCurrent("karlo")}>
           <h3 className="item">Karlo</h3>
         </div>
+        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("book")}>
+          <h3 className="item">Book</h3>
+        </div>
       </div>
       {current === "main" && <Main />}
       {current === "gpt" && <GPT />}
       {current === "kogpt" && <Kogpt />}
       {current === "karlo" && <Karlo />}
+      {current === "book" && <Book />}
     </div>
   );
 }

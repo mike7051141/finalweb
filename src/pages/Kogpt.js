@@ -19,7 +19,7 @@ const Kogpt = () => {
       const config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "/v1/inference/kogpt/generation",
+        //url: "/v1/inference/kogpt/generation",
         headers: {
           Authorization: "KakaoAK 4eb86019e227977251af1441c837fb0c",
           "Content-Type": "application/json",
