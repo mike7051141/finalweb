@@ -5,6 +5,8 @@ import Papago from "./pages/Papago";
 import Kogpt from "./pages/Kogpt";
 import Karlo from "./pages/Karlo";
 import Book from "./pages/Book";
+import Kymo from "./pages/Kymo";
+import Min from "./pages/Min";
 export default function App() {
   const [current, setCurrent] = useState("main");
 
@@ -27,11 +29,11 @@ export default function App() {
         <div style={{ cursor: "pointer" }} onClick={() => setCurrent("gpt")}>
           <h3 className="item">GPT</h3>
         </div>
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("kogpt")}>
-          <h3 className="item">Kogpt</h3>
+        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("kymo")}>
+          <h3 className="item">경모</h3>
         </div>
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("karlo")}>
-          <h3 className="item">Karlo</h3>
+        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("min")}>
+          <h3 className="item">민</h3>
         </div>
         <div style={{ cursor: "pointer" }} onClick={() => setCurrent("book")}>
           <h3 className="item">Book</h3>
@@ -39,8 +41,8 @@ export default function App() {
       </div>
       {current === "main" && <Main />}
       {current === "gpt" && <GPT />}
-      {current === "kogpt" && <Kogpt />}
-      {current === "karlo" && <Karlo />}
+      {current === "kymo" && <Kymo />}
+      {current === "min" && <Min />}
       {current === "book" && <Book />}
     </div>
   );
