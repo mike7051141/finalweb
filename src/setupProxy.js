@@ -5,7 +5,8 @@ module.exports = function (app) {
   app.use(
     "/v1",
     createProxyMiddleware({
-      target: "https://api.kakaobrain.com",
+      target: "https://openapi.naver.com",
+      //target: "https://api.kakaobrain.com",
       changeOrigin: true,
     })
   );
