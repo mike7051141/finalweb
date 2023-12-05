@@ -4,7 +4,7 @@ import { useState } from "react";
 // id = ee6178387d344c0da243b195c99b34c4
 // password = 37d2be423dbf4563b06394127f887b75
 
-const Min = () => {
+const SongList = () => {
   const [inputsearch, setinputSearch] = useState("");
   const [storedToken, setStoredToken] = useState("");
   const [albums, setAlbums] = useState([]);
@@ -123,4 +123,4 @@ const Min = () => {
     </div>
   );
 };
-export default Min;
+export default SongList;

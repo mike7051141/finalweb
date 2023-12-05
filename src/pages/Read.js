@@ -30,13 +30,14 @@ const Read = () => {
       console.error(error);
     }
   };
-  const finishReading = async (documentId) => {
-    console.log(documentId);
+  const finishReading = async (book) => {
+    console.log(book.id);
+    book.hasRead=true;
     try {
       // Make a request to update the hasRead value for the clicked document
-      await axios.patch(`http://localhost:4000/documents/${documentId}`, {
-        hasRead: true,
-      });
+      await axios.put(`http://localhost:4000/documents/${book.id}`,
+        book      
+      );
       searchBook();
     } catch (error) {
       console.error(error);
@@ -55,7 +56,7 @@ const Read = () => {
               src={book.thumbnail}
               alt="Thumbnail"
               style={{ maxWidth: "150px", marginRight: 20 }}
-              onClick={() => finishReading(book.id)}
+              onClick={() => finishReading(book)}
             />
 
             {/* 책 제목, 내용, 가격, 출판사 등등 */}
