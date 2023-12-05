@@ -59,19 +59,44 @@ const Book = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <div>
-        <textarea
+      <div style={{ position: "relative", width: 300, marginBottom: 30 }}>
+        <input
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="책 제목을 입력해주세요 :"
-          rows={4}
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+            border: "1px solid #ccc",
+            borderRadius: 10,
+            padding: 12,
+            fontSize: 20,
+          }}
+          type="text"
+          placeholder="책 제목을 입력하세요"
+        />
+        <img
+          style={{
+            position: "absolute",
+            width: 20,
+            top: 13,
+            right: 1,
+            cursor: "pointer",
+          }}
+          onClick={searchBook}
+          src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
         />
       </div>
-      <button onClick={searchBook}>책 검색</button>
       {/* 책 정보들 매핑해서 출력하기 */}
       {books.map((book, index) => (
-        <div key={index} style={{ display: "flex", marginBottom: 20 }}>
+        <div
+          key={index}
+          style={{
+            display: "flex",
+            marginBottom: 20,
+            border: "1px solid #ccc",
+            borderRadius: 20,
+            padding: 10,
+          }}
+        >
           {/* 썸네일 */}
           <img
             src={book.thumbnail}
