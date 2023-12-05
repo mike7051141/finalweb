@@ -131,7 +131,7 @@ export default function GPT() {
           style={{
             width: 100,
             height: 30,
-            backgroundColor: "lightgreen",
+            backgroundColor: "#919191",
             borderWidth: 0,
             borderRadius: 10,
             cursor: "pointer",
@@ -147,7 +147,15 @@ export default function GPT() {
           중요 노트
         </div>
         {notes.map((note) => (
-          <div key={note.id} style={{ marginBottom: 10, display: "flex" }}>
+          <div
+            key={note.id}
+            style={{
+              padding: 10,
+              display: "flex",
+              borderBottom: "0.5px solid #919191",
+              alignItems: "center",
+            }}
+          >
             <span style={{ flex: 1 }}>Q: {note.question}</span>
             <span style={{ flex: 4 }}>A: {note.answer}</span>
             <button
