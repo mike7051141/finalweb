@@ -1,9 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Read = () => {
   const [inputText, setInputText] = useState("");
   const [books, setBooks] = useState([]);
+  const [unreadBooks, setUnreadBooks] = useState([]);
+  const [readBooks, setReadBooks] = useState([]);
+
+  useEffect(() => {
+    searchBook();
+  }, []);
 
   const searchBook = async () => {
     try {
@@ -13,6 +19,7 @@ const Read = () => {
 
       // 책 정보 매핑
       const bookData = response.data.map((document) => ({
+        id: document.id,
         authors: document.authors,
         contents: document.contents,
         price: document.price,
@@ -21,23 +28,57 @@ const Read = () => {
         thumbnail: document.thumbnail,
         finishDate: document.finishDate,
         hasRead: document.hasRead,
-        id: document.id,
       }));
       console.log("Mapped Book Data:", bookData);
-      // Update state with the mapped book data
+
+      // 모든 도서를 state에 저장
       setBooks(bookData);
+
+      // hasRead가 false인 도서만 따로 저장
+      setUnreadBooks(bookData.filter((book) => !book.hasRead));
+
+      // hasRead가 true인 도서만 따로 저장
+      setReadBooks(bookData.filter((book) => book.hasRead));
     } catch (error) {
       console.error(error);
     }
   };
+
   const finishReading = async (book) => {
-    console.log(book.id);
-    book.hasRead=true;
+    try {
+      // hasRead 값을 true로 변경
+      book.hasRead = true;
+
+      // Make a request to update the hasRead value for the clicked document
+      await axios.put(`http://localhost:4000/documents/${book.id}`, book);
+
+      // 독서 목록 다시 불러오기
+      searchBook();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const unfinishReading = async (book) => {
+    try {
+      // hasRead 값을 true로 변경
+      book.hasRead = false;
+
+      // Make a request to update the hasRead value for the clicked document
+      await axios.put(`http://localhost:4000/documents/${book.id}`, book);
+
+      // 독서 목록 다시 불러오기
+      searchBook();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteRead = async (bookId) => {
     try {
       // Make a request to update the hasRead value for the clicked document
-      await axios.put(`http://localhost:4000/documents/${book.id}`,
-        book      
-      );
+      await axios.delete(`http://localhost:4000/documents/${bookId}`);
+      // 독서 목록 다시 불러오기
       searchBook();
     } catch (error) {
       console.error(error);
@@ -47,16 +88,15 @@ const Read = () => {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ padding: 20 }}>
-        <button onClick={searchBook}>Search toReadList</button>
+      <h3>아직 읽지 않은 책들</h3>
         {/* 책 정보들 매핑해서 출력하기 */}
-        {books.map((book, index) => (
+        {unreadBooks.map((book, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>
             {/* 썸네일 */}
             <img
               src={book.thumbnail}
               alt="Thumbnail"
               style={{ maxWidth: "150px", marginRight: 20 }}
-              onClick={() => finishReading(book)}
             />
 
             {/* 책 제목, 내용, 가격, 출판사 등등 */}
@@ -75,22 +115,24 @@ const Read = () => {
               </p>
               <p>가격: {book.price}원</p>
               <p>출판사: {book.publisher}</p>
-              <p>{book.finishDate}까지 읽을 예정이시죠?</p>
+              <p>읽기 완료 예정일 : {book.finishDate}</p>
+              <button onClick={() => finishReading(book)}>읽기 완료</button>
             </div>
           </div>
         ))}
       </div>
+
+
       <div style={{ padding: 20 }}>
-        <button onClick={searchBook}>Search toReadList</button>
+        <h3>다 읽은 책들</h3>
         {/* 책 정보들 매핑해서 출력하기 */}
-        {books.map((book, index) => (
+        {readBooks.map((book, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>
             {/* 썸네일 */}
             <img
               src={book.thumbnail}
               alt="Thumbnail"
               style={{ maxWidth: "150px", marginRight: 20 }}
-              onClick={() => finishReading(book.id)}
             />
 
             {/* 책 제목, 내용, 가격, 출판사 등등 */}
@@ -109,7 +151,9 @@ const Read = () => {
               </p>
               <p>가격: {book.price}원</p>
               <p>출판사: {book.publisher}</p>
-              <p>{book.finishDate}까지 읽을 예정이시죠?</p>
+              <p>읽기 완료 예정일 : {book.finishDate}</p>
+              <button onClick={() => unfinishReading(book)}>읽기 취소</button>
+              <button onClick={() => deleteRead(book.id)}>책 삭제</button>
             </div>
           </div>
         ))}
