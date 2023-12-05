@@ -100,31 +100,34 @@ export default function GPT() {
       <div style={{ display: "flex", alignItems: "center" }}>
         <span
           style={{
-            flex: 1,
-            textAlign: "left",
-            border: "1px solid black",
-            borderRightWidth: 0,
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
+            width: "90%",
+            border: "1px black solid",
+            borderRadius: 20,
             padding: 10,
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <strong style={{ fontSize: 20 }}>Q </strong>
-          {question}
-        </span>
-        <span
-          style={{
-            flex: 4,
-            textAlign: "left",
-            border: "1px solid black",
-            borderLeftWidth: 0,
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20,
-            padding: 10,
-            marginRight: 10,
-          }}
-        >
-          <strong style={{ fontSize: 20 }}>A </strong> {answer}
+          <div
+            style={{
+              width: "20%",
+              textAlign: "left",
+              padding: 10,
+            }}
+          >
+            <strong style={{ fontSize: 20 }}>Q </strong>
+            {question}
+          </div>
+          <div
+            style={{
+              width: "80%",
+              textAlign: "left",
+              padding: 10,
+              marginRight: 10,
+            }}
+          >
+            <strong style={{ fontSize: 20 }}>A </strong> {answer}
+          </div>
         </span>
         <button
           onClick={() => saveNote(question, answer)}

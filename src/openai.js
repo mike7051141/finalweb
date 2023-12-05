@@ -3,7 +3,7 @@ import axios from "axios";
 const chat = async (prompt, onMessage) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer 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",
+    Authorization: "Bearer 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",
   };
   const messages = [{ role: "user", content: prompt }];
 
