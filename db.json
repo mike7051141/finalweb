@@ -1,15 +1,6 @@
 {
   "documents": [
     {
-      "id": 1,
-      "authors": "string",
-      "contents": "string",
-      "price": 1,
-      "publisher": "string",
-      "title": "string",
-      "thumbnail": "string"
-    },
-    {
       "authors": [
         "앵거스 하일랜드",
         "켄드라 윌슨"
@@ -39,4 +30,4 @@
   "profile": {
     "name": "typicode"
   }
-}
+} 

@@ -7,6 +7,7 @@ import Main from "./pages/Main";
 import Book from "./pages/Book";
 import BookList from "./pages/BookList";
 import Min from "./pages/Min";
+import Read from "./pages/Read";
 export default function App() {
   const [current, setCurrent] = useState("main");
 
@@ -38,11 +39,8 @@ export default function App() {
         <div style={{ cursor: "pointer" }} onClick={() => setCurrent("book")}>
           <h3 className="item">Book</h3>
         </div>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={() => setCurrent("booklist")}
-        >
-          <h3 className="item">BookList</h3>
+        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("Read")}>
+          <h3 className="item">Read</h3>
         </div>
       </div>
       {/* {current === "gpt" && <GPT />}
@@ -50,7 +48,7 @@ export default function App() {
       {current === "main" && <Main />}
       {current === "min" && <Min />}
       {current === "book" && <Book />}
-      {current === "booklist" && <BookList />}
+      {current === "Read" && <Read />}
     </div>
   );
 }
