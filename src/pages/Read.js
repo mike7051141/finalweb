@@ -19,13 +19,23 @@ const Read = () => {
         publisher: document.publisher,
         title: document.title,
         thumbnail: document.thumbnail,
+        finishDate: document.finishDate,
+        hasRead: document.hasRead,
       }));
-      console.log(document);
-      console.log(bookData);
-
       console.log("Mapped Book Data:", bookData);
       // Update state with the mapped book data
       setBooks(bookData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const finishReading = async (documentId) => {
+    try {
+      // Make a request to update the hasRead value for the clicked document
+      await axios.patch(`http://localhost:4000/documents/${documentId}`, {
+        hasRead: true,
+      });
+      searchBook();
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +52,7 @@ const Read = () => {
             src={book.thumbnail}
             alt="Thumbnail"
             style={{ maxWidth: "150px", marginRight: 20 }}
+            onClick={() => finishReading(book.id)}
           />
 
           {/* 책 제목, 내용, 가격, 출판사 등등 */}
@@ -60,6 +71,7 @@ const Read = () => {
             </p>
             <p>가격: {book.price}원</p>
             <p>출판사: {book.publisher}</p>
+            <p>{book.finishDate}까지 읽을 예정이시죠?</p>
           </div>
         </div>
       ))}

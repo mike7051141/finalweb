@@ -35,12 +35,23 @@ const Book = () => {
 
   const addList = async (book) => {
     try {
-      const response = await axios.post(
-        `http://localhost:4000/documents`,
-        book
+      const hasRead = false;
+      const finishDate = prompt(
+        "언제까지 읽을 예정인가요? (날짜 형식: YYYY-MM-DD)"
       );
 
+      if (!finishDate) {
+        return;
+      }
+
+      const response = await axios.post(`http://localhost:4000/documents`, {
+        ...book,
+        finishDate,
+        hasRead,
+      });
+
       console.log("Book added to toReadList:", response.data);
+      alert(`책이 목록에 추가되었습니다. 완료 예정일: ${finishDate}`);
     } catch (error) {
       console.error(error);
     }
