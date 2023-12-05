@@ -1,8 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SongList = () => {
   const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    MySongList();
+  }, []);
 
   const MySongList = async () => {
     try {
@@ -30,7 +34,6 @@ const SongList = () => {
   };
   return (
     <div style={{ padding: 20 }}>
-      <button onClick={MySongList}>내 노래 리스트</button>
       <div>
         {albums.map((album, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>

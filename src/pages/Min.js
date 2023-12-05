@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // id = ee6178387d344c0da243b195c99b34c4
 // password = 37d2be423dbf4563b06394127f887b75
@@ -8,6 +8,10 @@ const Min = () => {
   const [inputsearch, setinputSearch] = useState("");
   const [storedToken, setStoredToken] = useState("");
   const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const getProfile = async () => {
     try {
@@ -89,8 +93,8 @@ const Min = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <button onClick={getProfile}>로그인</button>
-      <button onClick={token}>토큰값확인</button>
+      {/* <button onClick={getProfile}>로그인</button>
+      <button onClick={token}>토큰값확인</button> */}
       <div>
         <textarea
           style={{ with: 300, height: 20 }}
