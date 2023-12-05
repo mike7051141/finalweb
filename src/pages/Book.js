@@ -25,9 +25,23 @@ const Book = () => {
         title: document.title,
         thumbnail: document.thumbnail,
       }));
-
+      console.log(document);
+      console.log(bookData);
       // Update state with the mapped book data
       setBooks(bookData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addList = async (book) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/documents`,
+        book
+      );
+
+      console.log('Book added to toReadList:', response.data)
     } catch (error) {
       console.error(error);
     }
@@ -71,6 +85,7 @@ const Book = () => {
             </p>
             <p>가격: {book.price}원</p>
             <p>출판사: {book.publisher}</p>
+            <button onClick={()=>addList(book)}>Add to toReadList</button>
           </div>
         </div>
       ))}

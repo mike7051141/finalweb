@@ -1,0 +1,42 @@
+{
+  "documents": [
+    {
+      "id": 1,
+      "authors": "string",
+      "contents": "string",
+      "price": 1,
+      "publisher": "string",
+      "title": "string",
+      "thumbnail": "string"
+    },
+    {
+      "authors": [
+        "앵거스 하일랜드",
+        "켄드라 윌슨"
+      ],
+      "contents": "“사람과 마찬가지로 모든 나무에게는 저마다의 개성이 있다” _데이비드 호크니  세기의 화가들을 매료시킨 101가지 나무들 자연은 언제나 미술가들에게 영감을 선사하지만 그 중에서도 독보적 존재감을 뽐내며 작품의 중심에 서는 것이 있다. 바로 자연이 만든 최고의 걸작, ‘나무’다. 이 우직하고 아름다운 생명체는 화가들의 마음을 사로잡으며 최고의 그림 소재로서 그들의 예술 세계 한가운데로 들어갔다. 명화를 보면 수많은 화가들이 평생에 걸쳐 나무를 화폭에",
+      "price": 21000,
+      "publisher": "오후의서재",
+      "title": "화가가 사랑한 나무들",
+      "thumbnail": "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6244541%3Ftimestamp%3D20231116171322",
+      "id": 2
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
