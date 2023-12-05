@@ -7,14 +7,12 @@ const Read = () => {
 
   const searchBook = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/documents`
-      );
+      const response = await axios.get(`http://localhost:4000/documents`);
 
-      console.log('API Response:', response.data);
+      console.log("API Response:", response.data);
 
       // 책 정보 매핑
-      const bookData = response.data.documents.map((document) => ({
+      const bookData = response.data.map((document) => ({
         authors: document.authors,
         contents: document.contents,
         price: document.price,
@@ -25,7 +23,7 @@ const Read = () => {
       console.log(document);
       console.log(bookData);
 
-      console.log('Mapped Book Data:', bookData);
+      console.log("Mapped Book Data:", bookData);
       // Update state with the mapped book data
       setBooks(bookData);
     } catch (error) {
