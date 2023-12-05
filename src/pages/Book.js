@@ -16,7 +16,7 @@ const Book = () => {
         }
       );
 
-      // 책 정보 매핑
+      /** 책 정보 매핑 */
       const bookData = response.data.documents.map((document) => ({
         authors: document.authors,
         contents: document.contents,
@@ -25,7 +25,6 @@ const Book = () => {
         title: document.title,
         thumbnail: document.thumbnail,
       }));
-      console.log(document);
       console.log(bookData);
       // Update state with the mapped book data
       setBooks(bookData);
@@ -41,7 +40,7 @@ const Book = () => {
         book
       );
 
-      console.log('Book added to toReadList:', response.data)
+      console.log("Book added to toReadList:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +69,7 @@ const Book = () => {
           />
 
           {/* 책 제목, 내용, 가격, 출판사 등등 */}
-          <div>
+          <div style={{ flex: 1 }}>
             <h2 style={{ fontSize: 20 }}>{book.title}</h2>
             <p
               style={{
@@ -85,7 +84,7 @@ const Book = () => {
             </p>
             <p>가격: {book.price}원</p>
             <p>출판사: {book.publisher}</p>
-            <button onClick={()=>addList(book)}>Add to toReadList</button>
+            <button onClick={() => addList(book)}>Add to toReadList</button>
           </div>
         </div>
       ))}

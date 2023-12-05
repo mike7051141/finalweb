@@ -40,61 +40,65 @@ const Main = () => {
     >
       <h1 style={{ textAlign: "center", color: "black" }}>{title}</h1>
       <table>
-        <tr>
-          <td id="td2">
-            <img
-              alt="pic"
-              className="zoom round"
-              id="imagekangnam"
-              src={imageSrc}
-              width={250}
-            />
-          </td>
-          <td>
-            <table id="grid">
-              <tbody>
-                {names.map((name, index) => (
-                  <tr key={index}>
-                    <td className="td-left">
-                      <img
-                        alt="pic"
-                        className="ChangeImage"
-                        width={60}
-                        onClick={() => handleImageChange(index)}
-                        src={srcs[index]}
-                      />
-                    </td>
-                    <td className="td-right">
-                      <span>{name}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td id="td2">
+              <img
+                alt="pic"
+                className="zoom round"
+                id="imagekangnam"
+                src={imageSrc}
+                width={250}
+              />
+            </td>
+            <td>
+              <table id="grid">
+                <tbody>
+                  {names.map((name, index) => (
+                    <tr key={index}>
+                      <td className="td-left">
+                        <img
+                          alt="pic"
+                          className="ChangeImage"
+                          width={60}
+                          onClick={() => handleImageChange(index)}
+                          src={srcs[index]}
+                        />
+                      </td>
+                      <td className="td-right">
+                        <span>{name}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
       </table>
       <table>
-        <tr>
-          <td width="100px" className="hide">
-            이름:
-          </td>
-          <td width="300px">
-            <span id="knames">{kangnamInfo.name}</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="hide">학번:</td>
-          <td>
-            <span id="kangnamID">{kangnamInfo.id}</span>
-          </td>
-        </tr>
-        <tr>
-          <td className="hide">소개:</td>
-          <td>
-            <span id="kangnamIntro">{kangnamInfo.intro}</span>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td width="100px" className="hide">
+              이름:
+            </td>
+            <td width="300px">
+              <span id="knames">{kangnamInfo.name}</span>
+            </td>
+          </tr>
+          <tr>
+            <td className="hide">학번:</td>
+            <td>
+              <span id="kangnamID">{kangnamInfo.id}</span>
+            </td>
+          </tr>
+          <tr>
+            <td className="hide">소개:</td>
+            <td>
+              <span id="kangnamIntro">{kangnamInfo.intro}</span>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );
