@@ -95,7 +95,7 @@ const Book = () => {
             </p>
             <p>가격: {book.price}원</p>
             <p>출판사: {book.publisher}</p>
-            <button onClick={() => addList(book)}>Add to toReadList</button>
+            <button onClick={() => addList(book)}>읽을 목록에 추가하기</button>
           </div>
         </div>
       ))}
