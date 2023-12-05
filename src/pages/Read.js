@@ -33,10 +33,11 @@ const Read = () => {
   const finishReading = async (documentId) => {
     console.log(documentId);
     try {
+      book.hasRead=true; // 해당 값을 true로 변경 후 put 매핑을 보내고 싶음
       // Make a request to update the hasRead value for the clicked document
-      await axios.patch(`http://localhost:4000/documents/${documentId}`, {
-        hasRead: true,
-      });
+      await axios.put(`http://localhost:4000/documents/${book.id}`,
+        book      
+      );
       searchBook();
     } catch (error) {
       console.error(error);
