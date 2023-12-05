@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Main from "./pages/Main";
-import Book from "./pages/Book";
-import Min from "./pages/Min";
+import Books from "./pages/Books";
+import Songs from "./pages/Songs";
 import Read from "./pages/Read";
 import SongList from "./pages/SongList";
+import GPT from "./pages/GPT";
+
+const pages = ["main", "songs", "songlist", "books", "read", "gpt"];
+
 export default function App() {
   const [current, setCurrent] = useState("main");
 
@@ -15,35 +19,34 @@ export default function App() {
           width: "100%",
           color: "white",
           display: "flex",
-          padding: 15,
+          padding: 0,
           textAlign: "center",
           alignItems: "center",
         }}
       >
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("main")}>
-          <h3 className="item">메인 페이지</h3>
-        </div>
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("min")}>
-          <h3 className="item">민</h3>
-        </div>
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("book")}>
-          <h3 className="item">Book</h3>
-        </div>
-        <div style={{ cursor: "pointer" }} onClick={() => setCurrent("Read")}>
-          <h3 className="item">Read</h3>
-        </div>
-        <div
-          style={{ cursor: "pointer" }}
-          onClick={() => setCurrent("SongList")}
-        >
-          <h3 className="item">SongList</h3>
-        </div>
+        {pages.map((page) => (
+          <div
+            key={page}
+            style={{
+              width: 210,
+              height: 30,
+              padding: 15,
+              cursor: "pointer",
+              background: current === page ? "#919191" : "black",
+              color: current === page ? "black" : "white",
+            }}
+            onClick={() => setCurrent(page)}
+          >
+            <h3 className="item">{page === "main" ? "메인 페이지" : page}</h3>
+          </div>
+        ))}
       </div>
       {current === "main" && <Main />}
-      {current === "min" && <Min />}
-      {current === "book" && <Book />}
-      {current === "Read" && <Read />}
-      {current === "SongList" && <SongList />}
+      {current === "songs" && <Songs />}
+      {current === "books" && <Books />}
+      {current === "read" && <Read />}
+      {current === "songlist" && <SongList />}
+      {current === "gpt" && <GPT />}
     </div>
   );
 }

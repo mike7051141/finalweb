@@ -13,6 +13,9 @@ tr {
 tr-wrapper {
   margin-bottom: 20px;
 }
+.grey {
+  background-color: #c6c6c6;
+}
 .td-left {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;

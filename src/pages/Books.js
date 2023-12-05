@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-const Book = () => {
+export default function Book() {
   const [inputText, setInputText] = useState("");
   const [books, setBooks] = useState([]);
+  const refText = useRef();
 
   const searchBook = async () => {
     try {
@@ -56,12 +57,16 @@ const Book = () => {
       console.error(error);
     }
   };
+  useEffect(() => {
+    refText.current.focus();
+  }, []);
 
   return (
     <div style={{ padding: 20 }}>
       <div style={{ position: "relative", width: 300, marginBottom: 30 }}>
         <input
           value={inputText}
+          ref={refText}
           onChange={(e) => setInputText(e.target.value)}
           style={{
             width: "100%",
@@ -126,6 +131,4 @@ const Book = () => {
       ))}
     </div>
   );
-};
-
-export default Book;
+}

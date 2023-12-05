@@ -3,7 +3,7 @@ import axios from "axios";
 const chat = async (prompt, onMessage) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer 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",
+    Authorization: "Bearer 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",
   };
   const messages = [{ role: "user", content: prompt }];
 
@@ -15,6 +15,7 @@ const chat = async (prompt, onMessage) => {
         model: "gpt-3.5-turbo",
         temperature: 0.5,
         messages: messages,
+        max_tokens: 200,
       },
       { headers, timeout: 600000 }
     )
@@ -31,7 +32,7 @@ const chat = async (prompt, onMessage) => {
 const chatHistory = async (prompt, messages, onMessage) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer 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",
+    Authorization: "Bearer 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",
   };
   console.log("과거기역 : ", messages);
   console.log("질의 : ", prompt);
@@ -61,7 +62,7 @@ const chatHistory = async (prompt, messages, onMessage) => {
 const dalle = async (prompt, onMessage, n = 1, size = "256x256") => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer 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",
+    Authorization: "Bearer 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",
   };
 
   axios

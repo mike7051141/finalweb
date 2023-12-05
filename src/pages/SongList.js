@@ -2,7 +2,7 @@ import axios from "axios";
 import { async } from "q";
 import { useState, useEffect } from "react";
 
-const SongList = () => {
+export default function SongList() {
   const [albums, setAlbums] = useState([]);
   //const [songid, setSongid] = useState("");
 
@@ -69,5 +69,4 @@ const SongList = () => {
       </div>
     </div>
   );
-};
-export default SongList;
+}

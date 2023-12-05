@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const Read = () => {
-  const [inputText, setInputText] = useState("");
+export default function Read() {
   const [books, setBooks] = useState([]);
   const [unreadBooks, setUnreadBooks] = useState([]);
   const [readBooks, setReadBooks] = useState([]);
@@ -46,13 +45,8 @@ const Read = () => {
 
   const finishReading = async (book) => {
     try {
-      // hasRead 값을 true로 변경
       book.hasRead = true;
-
-      // Make a request to update the hasRead value for the clicked document
       await axios.put(`http://localhost:4000/documents/${book.id}`, book);
-
-      // 독서 목록 다시 불러오기
       searchBook();
     } catch (error) {
       console.error(error);
@@ -61,13 +55,8 @@ const Read = () => {
 
   const unfinishReading = async (book) => {
     try {
-      // hasRead 값을 true로 변경
       book.hasRead = false;
-
-      // Make a request to update the hasRead value for the clicked document
       await axios.put(`http://localhost:4000/documents/${book.id}`, book);
-
-      // 독서 목록 다시 불러오기
       searchBook();
     } catch (error) {
       console.error(error);
@@ -76,7 +65,6 @@ const Read = () => {
 
   const deleteRead = async (bookId) => {
     try {
-      // Make a request to update the hasRead value for the clicked document
       await axios.delete(`http://localhost:4000/documents/${bookId}`);
       // 독서 목록 다시 불러오기
       searchBook();
@@ -87,8 +75,8 @@ const Read = () => {
 
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ padding: 20 }}>
-      <h3>아직 읽지 않은 책들</h3>
+      <div style={{ padding: 20, flex: 1 }}>
+        <h3>아직 읽지 않은 책들</h3>
         {/* 책 정보들 매핑해서 출력하기 */}
         {unreadBooks.map((book, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>
@@ -98,7 +86,6 @@ const Read = () => {
               alt="Thumbnail"
               style={{ maxWidth: "150px", marginRight: 20 }}
             />
-
             {/* 책 제목, 내용, 가격, 출판사 등등 */}
             <div>
               <h2 style={{ fontSize: 20 }}>{book.title}</h2>
@@ -122,8 +109,7 @@ const Read = () => {
         ))}
       </div>
 
-
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: 20, flex: 1 }}>
         <h3>다 읽은 책들</h3>
         {/* 책 정보들 매핑해서 출력하기 */}
         {readBooks.map((book, index) => (
@@ -160,6 +146,4 @@ const Read = () => {
       </div>
     </div>
   );
-};
-
-export default Read;
+}

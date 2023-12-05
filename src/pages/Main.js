@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../style.css";
-const Main = () => {
+export default function Main() {
   const title = "웹 개발 응용 (화) 프로젝트";
   const [imageSrc, setImageSrc] = useState("kangnam_logo.png");
   const [kangnamInfo, setKangnamInfo] = useState({
@@ -102,6 +102,4 @@ const Main = () => {
       </table>
     </div>
   );
-};
-
-export default Main;
+}
