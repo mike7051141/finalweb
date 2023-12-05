@@ -30,10 +30,10 @@ const Read = () => {
       console.error(error);
     }
   };
-  const finishReading = async (documentId) => {
-    console.log(documentId);
+  const finishReading = async (book) => {
+    console.log(book.id);
+    book.hasRead=true;
     try {
-      book.hasRead=true; // 해당 값을 true로 변경 후 put 매핑을 보내고 싶음
       // Make a request to update the hasRead value for the clicked document
       await axios.put(`http://localhost:4000/documents/${book.id}`,
         book      
@@ -56,7 +56,7 @@ const Read = () => {
               src={book.thumbnail}
               alt="Thumbnail"
               style={{ maxWidth: "150px", marginRight: 20 }}
-              onClick={() => finishReading(book.id)}
+              onClick={() => finishReading(book)}
             />
 
             {/* 책 제목, 내용, 가격, 출판사 등등 */}
