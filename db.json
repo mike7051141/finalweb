@@ -10,7 +10,7 @@
       "title": "역행자",
       "thumbnail": "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6079127%3Ftimestamp%3D20231118154505",
       "finishDate": "2000-07-05",
-      "hasRead": false,
+      "hasRead": true,
       "id": 1
     },
     {
@@ -21,7 +21,7 @@
       "title": "안녕 팝콘",
       "thumbnail": "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6236053%3Ftimestamp%3D20231202183259",
       "finishDate": "2000-08-16",
-      "hasRead": false,
+      "hasRead": true,
       "id": 2
     }
   ],
