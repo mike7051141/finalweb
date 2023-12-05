@@ -1,8 +1,10 @@
 import axios from "axios";
+import { async } from "q";
 import { useState, useEffect } from "react";
 
 const SongList = () => {
   const [albums, setAlbums] = useState([]);
+  //const [songid, setSongid] = useState("");
 
   useEffect(() => {
     MySongList();
@@ -23,11 +25,22 @@ const SongList = () => {
         images: entry.album.images,
         release_date: entry.album.release_date,
         total_tracks: entry.album.total_tracks,
-        id: entry.id,
+        songid: entry.id,
       }));
 
       console.log(albums);
       setAlbums(albums); // 앨범 정보를 state 또는 변수에 저장할 수 있습니다.
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const DeleteSong = async (songid) => {
+    try {
+      // Make a request to update the hasRead value for the clicked document
+      await axios.delete(`http://localhost:4000/song/${songid}`);
+      // 독서 목록 다시 불러오기
+      MySongList();
     } catch (error) {
       console.error(error);
     }
@@ -49,6 +62,7 @@ const SongList = () => {
               <p>{`앨범 타입: ${album.album_type}`}</p>
               <p>{`출시 날짜: ${album.release_date}`}</p>
               <p>{`트랙 수: ${album.total_tracks}`}</p>
+              <button onClick={() => DeleteSong(album.songid)}>삭제</button>
             </div>
           </div>
         ))}

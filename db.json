@@ -1,4 +1,22 @@
 {
   "documents": [],
-  "song":[]
+  "song": [
+    {
+      "album": {
+        "name": "좋은날",
+        "artists": "미나리",
+        "album_type": "single",
+        "external_urls": "https://open.spotify.com/album/4cHMRGSIEd03ckEAqqUuxj",
+        "album_href": "https://api.spotify.com/v1/albums/4cHMRGSIEd03ckEAqqUuxj",
+        "images": [
+          "https://i.scdn.co/image/ab67616d0000b273aea14cbe6cf86c6d5ec27fc8",
+          "https://i.scdn.co/image/ab67616d00001e02aea14cbe6cf86c6d5ec27fc8",
+          "https://i.scdn.co/image/ab67616d00004851aea14cbe6cf86c6d5ec27fc8"
+        ],
+        "release_date": "2020-11-18",
+        "total_tracks": 1
+      },
+      "id": 2
+    }
+  ]
 }
