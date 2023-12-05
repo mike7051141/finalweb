@@ -1,71 +1,25 @@
 import axios from "axios";
 import { useState } from "react";
 
-// id = ee6178387d344c0da243b195c99b34c4
-// password = 37d2be423dbf4563b06394127f887b75
-
 const SongList = () => {
-  const [inputsearch, setinputSearch] = useState("");
-  const [storedToken, setStoredToken] = useState("");
   const [albums, setAlbums] = useState([]);
 
-  const getProfile = async () => {
+  const MySongList = async () => {
     try {
-      const Id = "ee6178387d344c0da243b195c99b34c4";
-      const Password = "37d2be423dbf4563b06394127f887b75";
-      const response = await axios.post(
-        "https://accounts.spotify.com/api/token",
-        "grant_type=client_credentials&client_id=" +
-          Id +
-          "&client_secret=" +
-          Password,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-
-      console.log(response.data);
-      console.log(response.data.access_token);
-
-      setStoredToken(response.data.access_token);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const token = async () => {
-    console.log(storedToken);
-  };
-
-  const Searchsong = async () => {
-    try {
-      const response = await axios.get("https://api.spotify.com/v1/search", {
-        params: {
-          q: inputsearch,
-          type: "album",
-          limit: 20,
-          offset: 5,
-          include_external: true,
-        },
-        headers: {
-          Authorization: "Bearer " + storedToken,
-        },
-      });
+      const response = await axios.get("http://localhost:4000/song");
 
       console.log(response.data);
 
-      const albums = response.data.albums.items.map((album) => ({
-        name: album.name,
-        artists: album.artists.map((artist) => artist.name).join(", "),
-        album_type: album.album_type,
-        external_urls: album.external_urls.spotify,
-        album_href: album.href,
-        images: album.images.map((image) => image.url),
-        is_playable: album.is_playable,
-        release_date: album.release_date,
-        total_tracks: album.total_tracks,
+      const albums = response.data.map((entry) => ({
+        name: entry.album.name,
+        artists: entry.album.artists,
+        album_type: entry.album.album_type,
+        external_urls: entry.album.external_urls,
+        album_href: entry.album.album_href,
+        images: entry.album.images,
+        release_date: entry.album.release_date,
+        total_tracks: entry.album.total_tracks,
+        id: entry.id,
       }));
 
       console.log(albums);
@@ -74,32 +28,9 @@ const SongList = () => {
       console.error(error);
     }
   };
-
-  const addSongList = async (album) => {
-    try {
-      const response = await axios.post(`http://localhost:4000/song`, {
-        album,
-      });
-
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div style={{ padding: 20 }}>
-      <button onClick={getProfile}>로그인</button>
-      <button onClick={token}>토큰값확인</button>
-      <div>
-        <textarea
-          style={{ with: 300, height: 20 }}
-          value={inputsearch}
-          onChange={(e) => setinputSearch(e.target.value)}
-          placeholder="노래 검색"
-        ></textarea>
-      </div>
-      <button onClick={Searchsong}>노래검색</button>
+      <button onClick={MySongList}>내 노래 리스트</button>
       <div>
         {albums.map((album, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>
@@ -115,7 +46,6 @@ const SongList = () => {
               <p>{`앨범 타입: ${album.album_type}`}</p>
               <p>{`출시 날짜: ${album.release_date}`}</p>
               <p>{`트랙 수: ${album.total_tracks}`}</p>
-              <button onClick={() => addSongList(album)}>노래 추가</button>
             </div>
           </div>
         ))}
