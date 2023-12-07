@@ -27,6 +27,7 @@ export default function Read() {
         thumbnail: document.thumbnail,
         finishDate: document.finishDate,
         hasRead: document.hasRead,
+        review: document.review
       }));
       console.log("Mapped Book Data:", bookData);
 
@@ -46,6 +47,13 @@ export default function Read() {
   const finishReading = async (book) => {
     try {
       book.hasRead = true;
+      const review = prompt(
+        "책을 다 읽은 소감을 남겨주세요."
+      );
+      if (!review) {
+        return;
+      }
+      book.review = review;
       await axios.put(`http://localhost:4000/documents/${book.id}`, book);
       searchBook();
     } catch (error) {
@@ -56,6 +64,7 @@ export default function Read() {
   const unfinishReading = async (book) => {
     try {
       book.hasRead = false;
+      book.review = null;
       await axios.put(`http://localhost:4000/documents/${book.id}`, book);
       searchBook();
     } catch (error) {
@@ -137,7 +146,7 @@ export default function Read() {
               </p>
               <p>가격: {book.price}원</p>
               <p>출판사: {book.publisher}</p>
-              <p>읽기 완료 예정일 : {book.finishDate}</p>
+              <p>독서 소감 : {book.review}</p>
               <button onClick={() => unfinishReading(book)}>읽기 취소</button>
               <button onClick={() => deleteRead(book.id)}>책 삭제</button>
             </div>

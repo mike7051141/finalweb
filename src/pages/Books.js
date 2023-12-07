@@ -37,6 +37,7 @@ export default function Book() {
   const addList = async (book) => {
     try {
       const hasRead = false;
+      const review = null;
       const finishDate = prompt(
         "언제까지 읽을 예정인가요? (날짜 형식: YYYY-MM-DD)"
       );
@@ -49,6 +50,7 @@ export default function Book() {
         ...book,
         finishDate,
         hasRead,
+        review
       });
 
       console.log("Book added to toReadList:", response.data);
