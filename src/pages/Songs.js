@@ -8,10 +8,12 @@ export default function Songs() {
   const [inputsearch, setinputSearch] = useState("");
   const [storedToken, setStoredToken] = useState("");
   const [albums, setAlbums] = useState([]);
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     getProfile();
-  }, []);
+    console.log(tracks);
+  }, [tracks]);
 
   const getProfile = async () => {
     try {
@@ -30,17 +32,13 @@ export default function Songs() {
         }
       );
 
-      console.log(response.data);
-      console.log(response.data.access_token);
+      // console.log(response.data);
+      // console.log(response.data.access_token);
 
       setStoredToken(response.data.access_token);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const token = async () => {
-    console.log(storedToken);
   };
 
   const Searchsong = async () => {
@@ -58,13 +56,11 @@ export default function Songs() {
         },
       });
 
-      console.log(response.data);
-
       const albums = response.data.albums.items.map((album) => ({
         name: album.name,
+        album_Id: album.id,
         artists: album.artists.map((artist) => artist.name).join(", "),
-        album_type: album.album_type,
-        external_urls: album.external_urls.spotify,
+        type: album.album_type,
         album_href: album.href,
         images: album.images.map((image) => image.url),
         is_playable: album.is_playable,
@@ -72,7 +68,7 @@ export default function Songs() {
         total_tracks: album.total_tracks,
       }));
 
-      console.log(albums);
+      // console.log(albums);
       setAlbums(albums); // 앨범 정보를 state 또는 변수에 저장할 수 있습니다.
     } catch (error) {
       console.error(error);
@@ -80,11 +76,37 @@ export default function Songs() {
   };
 
   const addSongList = async (album) => {
+    console.log(album);
     try {
-      const response = await axios.post(`http://localhost:4000/song`, {
-        album,
-      });
+      const response = await axios.get(
+        `https://api.spotify.com/v1/albums/${album.album_Id}/tracks`,
+        {
+          headers: {
+            Authorization: "Bearer " + storedToken,
+          },
+        }
+      );
+      console.log(response);
 
+      const tracks1 = response.data.items.map((track) => ({
+        name: track.name,
+        track_Id: track.id,
+        preview_url: track.preview_url,
+      }));
+
+      setTracks(tracks1);
+      console.log(tracks1);
+      console.log(tracks);
+
+      sendToServer({ ...album, tracks: tracks1 });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const sendToServer = async (data) => {
+    try {
+      const response = await axios.post(`http://localhost:4000/song`, data);
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -92,9 +114,7 @@ export default function Songs() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* <button onClick={getProfile}>로그인</button>
-      <button onClick={token}>토큰값확인</button> */}
+    <div style={{ padding: 20, position: "relative" }}>
       <div>
         <textarea
           style={{ with: 300, height: 20 }}
@@ -104,22 +124,22 @@ export default function Songs() {
         ></textarea>
       </div>
       <button onClick={Searchsong}>노래검색</button>
-      <div>
+      <div style={{ marginTop: 20 }}>
         {albums.map((album, index) => (
           <div key={index} style={{ display: "flex", marginBottom: 20 }}>
             <img
               src={album.images[0]}
               alt="Album Thumbnail"
-              style={{ maxWidth: "150px", marginRight: 20 }}
+              style={{ width: 150 }}
             />
 
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, padding: 20 }}>
               <h2 style={{ fontSize: 20 }}>{album.name}</h2>
-              <p>{`아티스트: ${album.artists}`}</p>
-              <p>{`앨범 타입: ${album.album_type}`}</p>
-              <p>{`출시 날짜: ${album.release_date}`}</p>
-              <p>{`트랙 수: ${album.total_tracks}`}</p>
-              <button onClick={() => addSongList(album)}>노래 추가</button>
+              <p>아티스트: ${album.artists}</p>
+              <p>앨범 타입: ${album.album_type}</p>
+              <p>출시 날짜: ${album.release_date}</p>
+              <p>트랙 수: ${album.total_tracks}</p>
+              <button onClick={() => addSongList(album)}>앨범 추가</button>
             </div>
           </div>
         ))}
