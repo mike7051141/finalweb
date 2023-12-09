@@ -7,6 +7,7 @@ export default function GPT() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [notes, setNotes] = useState([]);
+  const [noteCount, setNoteCount] = useState(0);
   const refText = useRef();
 
   const sendChat = () => {
@@ -59,6 +60,7 @@ export default function GPT() {
     try {
       const response = await axios.get(`http://localhost:4000/notes`);
       setNotes(response.data);
+      setNoteCount(response.data.length);
     } catch (error) {
       console.error(error);
     }
@@ -110,7 +112,7 @@ export default function GPT() {
         >
           <div
             style={{
-              width: "20%",
+              width: "25%",
               textAlign: "left",
               padding: 10,
             }}
@@ -120,7 +122,7 @@ export default function GPT() {
           </div>
           <div
             style={{
-              width: "80%",
+              width: "75%",
               textAlign: "left",
               padding: 10,
               marginRight: 10,
@@ -147,7 +149,7 @@ export default function GPT() {
       <hr />
       <div>
         <div style={{ textAlign: "center", fontSize: 30, padding: 10 }}>
-          중요 노트
+          복습해야 할 중요 노트 {noteCount}개
         </div>
         {notes.map((note) => (
           <div
