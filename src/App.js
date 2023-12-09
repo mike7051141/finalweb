@@ -6,7 +6,7 @@ import Read from "./pages/Read";
 import SongList from "./pages/SongList";
 import GPT from "./pages/GPT";
 
-const pages = ["main", "songs", "songlist", "books", "read", "gpt"];
+const pages = ["main", "Songs", "SongList", "Books", "Read", "GPT"];
 
 export default function App() {
   const [current, setCurrent] = useState("main");
@@ -42,11 +42,11 @@ export default function App() {
         ))}
       </div>
       {current === "main" && <Main />}
-      {current === "songs" && <Songs />}
-      {current === "books" && <Books />}
-      {current === "read" && <Read />}
-      {current === "songlist" && <SongList />}
-      {current === "gpt" && <GPT />}
+      {current === "Songs" && <Songs />}
+      {current === "Books" && <Books />}
+      {current === "Read" && <Read />}
+      {current === "SongList" && <SongList />}
+      {current === "GPT" && <GPT />}
     </div>
   );
 }

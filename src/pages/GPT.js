@@ -49,7 +49,6 @@ export default function GPT() {
     try {
       const response = await axios.delete(`http://localhost:4000/notes/${id}`);
       console.log(response);
-      alert(`완벽히 이해하셨나요?!`);
       fetchNotes();
     } catch (error) {
       console.error(error);
