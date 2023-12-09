@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 export default function SongList() {
   const [albums, setAlbums] = useState([]);
   const [selectedAlbumTracks, setSelectedAlbumTracks] = useState([]);
-  //const [songid, setSongid] = useState("");
 
   useEffect(() => {
     MySongList();
@@ -38,7 +37,6 @@ export default function SongList() {
   };
 
   const fetchAlbumTracks = (albumId) => {
-    // albumId에 해당하는 앨범의 트랙을 가져와서 상태에 저장
     const selectedAlbum = albums.find((album) => album.songid === albumId);
     setSelectedAlbumTracks(selectedAlbum ? selectedAlbum.tracks : []);
   };

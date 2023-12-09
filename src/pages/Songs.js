@@ -8,12 +8,10 @@ export default function Songs() {
   const [inputsearch, setinputSearch] = useState("");
   const [storedToken, setStoredToken] = useState("");
   const [albums, setAlbums] = useState([]);
-  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     getProfile();
-    console.log(tracks);
-  }, [tracks]);
+  }, []);
 
   const getProfile = async () => {
     try {
@@ -31,9 +29,6 @@ export default function Songs() {
           },
         }
       );
-
-      // console.log(response.data);
-      // console.log(response.data.access_token);
 
       setStoredToken(response.data.access_token);
     } catch (error) {
@@ -68,8 +63,7 @@ export default function Songs() {
         total_tracks: album.total_tracks,
       }));
 
-      // console.log(albums);
-      setAlbums(albums); // 앨범 정보를 state 또는 변수에 저장할 수 있습니다.
+      setAlbums(albums);
     } catch (error) {
       console.error(error);
     }
@@ -88,17 +82,15 @@ export default function Songs() {
       );
       console.log(response);
 
-      const tracks1 = response.data.items.map((track) => ({
+      const tracks = response.data.items.map((track) => ({
         name: track.name,
         track_Id: track.id,
         preview_url: track.preview_url,
       }));
 
-      setTracks(tracks1);
-      console.log(tracks1);
       console.log(tracks);
 
-      sendToServer({ ...album, tracks: tracks1 });
+      sendToServer({ ...album, tracks: tracks });
     } catch (error) {
       console.error(error);
     }
